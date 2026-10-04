@@ -1,0 +1,52 @@
+aws_region = "us-east-1"
+ami_id     = "ami-0c7217cdde317cfec"
+
+instances = {
+  "web-frontend" = {
+    instance_type    = "t3.micro"
+    root_volume_type = "gp2"
+    root_volume_size = 20
+    key_name         = "key-web-frontend"
+    environment      = "development"
+    owner            = "frontend-team"
+    prevent_destroy  = false
+  }
+  "api-backend" = {
+    instance_type    = "t3.small"
+    root_volume_type = "gp3"
+    root_volume_size = 35
+    key_name         = "key-api-backend"
+    environment      = "staging"
+    owner            = "backend-team"
+    prevent_destroy  = false
+  }
+  "prod-database" = {
+    instance_type    = "c5.large"
+    root_volume_type = "io2"
+    root_volume_size = 50
+    iops             = 3000
+    key_name         = "key-prod-database"
+    environment      = "production"
+    owner            = "dba-team"
+    prevent_destroy  = true # Accidental deletion protection
+  }
+  "analytics-worker" = {
+    instance_type    = "m5.large"
+    root_volume_type = "standard"
+    root_volume_size = 75
+    key_name         = "key-analytics-worker"
+    environment      = "production"
+    owner            = "data-analytics-team"
+    prevent_destroy  = false
+  }
+  "cache-cluster" = {
+    instance_type    = "r5.large"
+    root_volume_type = "io1"
+    root_volume_size = 100
+    iops             = 4000
+    key_name         = "key-cache-cluster"
+    environment      = "production"
+    owner            = "platform-team"
+    prevent_destroy  = false
+  }
+}
